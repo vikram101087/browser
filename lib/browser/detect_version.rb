@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 module Browser
   module DetectVersion
     private
@@ -10,8 +10,8 @@ module Browser
       expected_version = parse_version(expected_version)
       actual_version = parse_version(actual_version)
 
-      Gem::Requirement.create(expected_version)
-        .satisfied_by?(Gem::Version.create(actual_version))
+      Gem::Requirement.create(expected_version).
+        satisfied_by?(Gem::Version.create(actual_version))
     end
 
     def parse_version(version)

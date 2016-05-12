@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 module Browser
   class Base
     include DetectVersion
@@ -8,7 +8,8 @@ module Browser
     # Return an array with all preferred languages that this browser accepts.
     attr_reader :accept_language
 
-    def initialize(ua, accept_language: nil)
+    def initialize(ua, options={})
+      accept_language = options[:accept_language] || nil
       @ua = ua
       @accept_language = AcceptLanguage.parse(accept_language)
     end
@@ -51,7 +52,7 @@ module Browser
 
     # Return true if browser is modern (Webkit, Firefox 17+, IE9+, Opera 12+).
     def modern?
-      Browser.modern_rules.any? {|rule| rule === self } # rubocop:disable Metrics/LineLength, Style/CaseEquality
+      Browser.modern_rules.any? {|rule|  rule.is_a?(Proc) ? rule.call(self) : rule === self } # rubocop:disable Metrics/LineLength, Style/CaseEquality
     end
 
     # Detect if browser is Microsoft Internet Explorer.

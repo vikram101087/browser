@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 module Browser
   module Meta
     def self.rules
@@ -19,9 +19,11 @@ module Browser
     end
 
     def self.get(browser)
-      rules.each_with_object(Set.new) do |rule, meta|
+      meta = Set.new
+      rules.each do |rule|
         meta.merge(rule.new(browser).to_a)
-      end.to_a
+      end
+      meta.to_a
     end
 
     class Base

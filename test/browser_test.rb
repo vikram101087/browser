@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 require "test_helper"
 
 class BrowserTest < Minitest::Test
@@ -117,14 +117,14 @@ class BrowserTest < Minitest::Test
   end
 
   test "sets accept language while instantiating object" do
-    browser = Browser.new("", accept_language: "pt-br")
+    browser = Browser.new("", :accept_language => "pt-br")
 
     assert_kind_of Array, browser.accept_language
     assert_equal ["pt-BR"], browser.accept_language.map(&:full)
   end
 
   test "returns all known languages" do
-    browser = Browser.new("", accept_language: "en-us,en;q=0.8,pt-br;q=0.5,pt;q=0.3")
+    browser = Browser.new("", :accept_language => "en-us,en;q=0.8,pt-br;q=0.5,pt;q=0.3")
     assert_equal ["en-US", "en", "pt-BR", "pt"], browser.accept_language.map(&:full)
   end
 

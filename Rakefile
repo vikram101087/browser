@@ -18,9 +18,9 @@ task "test:all" do
     Gemfile
     gemfiles/rails3.gemfile
   ].each do |gemfile|
-    puts "=> Running with Gemfile: #{gemfile}"
+    puts "=> Running with :Gemfile => #{gemfile}"
     system "BUNDLE_GEMFILE=#{gemfile} rake test"
   end
 end
 
-task default: "test"
+task :default => "test"

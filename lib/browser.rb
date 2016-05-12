@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 require "set"
 require "yaml"
 require "pathname"
@@ -116,17 +116,17 @@ module Browser
   end
 
   modern_rules.tap do |rules|
-    rules << -> (b) { b.webkit? }
-    rules << -> (b) { b.firefox? && b.version.to_i >= 17 }
-    rules << -> (b) { b.ie? && b.version.to_i >= 9 && !b.compatibility_view? }
-    rules << -> (b) { b.edge? && !b.compatibility_view? }
-    rules << -> (b) { b.opera? && b.version.to_i >= 12 }
-    rules << -> (b) { b.firefox? && b.device.tablet? && b.platform.android? && b.version.to_i >= 14 } # rubocop:disable Metrics/LineLength
+    rules <<  lambda{|b| b.webkit? }
+    rules <<  lambda{|b| b.firefox? && b.version.to_i >= 17 }
+    rules <<  lambda{|b| b.ie? && b.version.to_i >= 9 && !b.compatibility_view? }
+    rules <<  lambda{|b| b.edge? && !b.compatibility_view? }
+    rules <<  lambda{|b| b.opera? && b.version.to_i >= 12 }
+    rules <<  lambda{|b| b.firefox? && b.device.tablet? && b.platform.android? && b.version.to_i >= 14 } # rubocop:disable Metrics/LineLength
   end
 
-  def self.new(user_agent, **kwargs)
-    matchers
-      .map {|klass| klass.new(user_agent || EMPTY_STRING, **kwargs) }
-      .find(&:match?)
+  def self.new(user_agent, options={})
+    matchers.
+      map {|klass| klass.new(user_agent || EMPTY_STRING, options) }.
+      find(&:match?)
   end
 end

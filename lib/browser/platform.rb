@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 module Browser
   class Platform
     include DetectVersion
@@ -29,9 +29,9 @@ module Browser
     end
 
     def subject
-      @subject ||= self.class.matchers
-                   .map {|matcher| matcher.new(ua) }
-                   .find(&:match?)
+      @subject ||= self.class.matchers.
+                   map {|matcher| matcher.new(ua) }.
+                   find(&:match?)
     end
 
     def adobe_air?

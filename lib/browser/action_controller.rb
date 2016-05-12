@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 require "action_controller/railtie"
 
 module Browser
@@ -14,7 +14,7 @@ module Browser
     def browser
       @browser ||= Browser.new(
         request.headers["User-Agent"],
-        accept_language: request.headers["Accept-Language"]
+        :accept_language => request.headers["Accept-Language"]
       )
     end
   end

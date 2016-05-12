@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# :frozen_string_literal => true
 module Browser
   class AcceptLanguage
     def self.languages
@@ -8,13 +8,13 @@ module Browser
     def self.parse(accept_language)
       return [] unless accept_language
 
-      accept_language
-        .split(",")
-        .map {|string| string.squeeze(" ").strip }
-        .map {|part| new(part) }
-        .reject {|al| al.quality.zero? }
-        .sort_by(&:quality)
-        .reverse
+      accept_language.
+        split(",").
+        map {|string| string.squeeze(" ").strip }.
+        map {|part| new(part) }.
+        reject {|al| al.quality.zero? }.
+        sort_by(&:quality).
+        reverse
     end
 
     attr_reader :part
